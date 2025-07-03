@@ -46,8 +46,43 @@ class WeatherApp {
             });
         }
 
+        // 快捷城市按钮
+        this.setupQuickCityButtons();
+        
         // 新功能事件监听器
         this.setupNewFeatureListeners();
+    }
+
+    // 设置快捷城市按钮
+    setupQuickCityButtons() {
+        const quickCityButtons = document.querySelectorAll('.quick-city-btn');
+        quickCityButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const cityName = button.dataset.city;
+                this.handleQuickCitySelection(cityName);
+            });
+        });
+    }
+
+    // 处理快捷城市选择
+    async handleQuickCitySelection(cityName) {
+        try {
+            // 设置搜索框的值
+            const citySearch = document.getElementById('city-search');
+            if (citySearch) {
+                citySearch.value = cityName;
+            }
+            
+            // 加载该城市的天气
+            await this.loadWeatherForCity(cityName);
+            
+            // 显示成功消息
+            this.showMessage(`Weather loaded for ${cityName}`, 'success');
+            
+        } catch (error) {
+            console.error('Error loading weather for quick city:', error);
+            this.showMessage(`Failed to load weather for ${cityName}`, 'error');
+        }
     }
 
     // 设置新功能事件监听器
@@ -161,7 +196,7 @@ class WeatherApp {
         const resetBtn = document.getElementById('reset-settings');
         if (resetBtn) {
             resetBtn.addEventListener('click', () => {
-                if (confirm('确定要重置所有设置吗？')) {
+                if (confirm('Are you sure you want to reset all settings?')) {
                     settingsManager.resetSettings();
                     this.loadSettingsUI();
                 }
@@ -196,14 +231,14 @@ class WeatherApp {
     // 显示API密钥设置说明
     showApiKeyInstructions() {
         if (!weatherAPI.isValidApiKey()) {
-            console.log('=== 天气API设置说明 ===');
-            console.log('1. 访问 https://openweathermap.org/api');
-            console.log('2. 注册免费账户并获取API密钥');
-            console.log('3. 在 weather-api.js 文件中替换 YOUR_API_KEY_HERE');
-            console.log('4. 刷新页面即可使用');
-            
-            // 在界面上显示提示
-            this.showMessage('请先设置OpenWeatherMap API密钥才能获取实时天气数据', 'warning');
+                    console.log('=== Weather API Setup Instructions ===');
+        console.log('1. Visit https://openweathermap.org/api');
+        console.log('2. Register for a free account and get API key');
+        console.log('3. Replace YOUR_API_KEY_HERE in weather-api.js');
+        console.log('4. Refresh the page to use');
+        
+        // Display instructions on interface
+        this.showMessage('Please set OpenWeatherMap API key to get real-time weather data', 'warning');
         }
     }
 
@@ -212,7 +247,7 @@ class WeatherApp {
         try {
             await this.loadWeatherForCity('New York');
         } catch (error) {
-            console.error('加载默认天气失败:', error);
+            console.error('Failed to load default weather:', error);
             this.showDemoWeather();
         }
     }
@@ -220,18 +255,18 @@ class WeatherApp {
     // 处理GPS定位
     async handleGPSLocation() {
         if (!locationService.isGPSAvailable) {
-            this.showMessage('您的浏览器不支持GPS定位功能', 'error');
+            this.showMessage('Your browser does not support GPS location feature', 'error');
             return;
         }
 
-        this.showLoading('正在获取您的位置...');
+        this.showLoading('Getting your location...');
 
         try {
             const position = await locationService.getCurrentPosition();
             
             // 检查是否在美国境内
             if (!locationService.isInUSA(position.lat, position.lon)) {
-                this.showMessage('此服务仅支持美国境内的天气预报', 'warning');
+                this.showMessage('This service supports weather forecasts worldwide', 'info');
                 this.hideLoading();
                 return;
             }
@@ -243,7 +278,7 @@ class WeatherApp {
             this.updateLocationDisplay(nearestCity || position);
             
         } catch (error) {
-            console.error('GPS定位失败:', error);
+            console.error('GPS location failed:', error);
             this.showMessage(error.message, 'error');
             this.hideLoading();
         }
@@ -256,7 +291,7 @@ class WeatherApp {
 
         const cityName = citySearch.value.trim();
         if (!cityName) {
-            this.showMessage('请输入城市名称', 'warning');
+            this.showMessage('Please enter city name', 'warning');
             return;
         }
 
@@ -265,7 +300,7 @@ class WeatherApp {
 
     // 根据城市名加载天气
     async loadWeatherForCity(cityName) {
-        this.showLoading(`正在加载 ${cityName} 的天气信息...`);
+        this.showLoading(`Loading weather information for ${cityName}...`);
 
         try {
             let weatherData;
@@ -285,8 +320,8 @@ class WeatherApp {
             await this.loadForecastAndAlerts(weatherData.location.lat, weatherData.location.lon);
             
         } catch (error) {
-            console.error('加载城市天气失败:', error);
-            this.showMessage(`无法找到城市 "${cityName}" 的天气信息`, 'error');
+            console.error('Failed to load city weather:', error);
+            this.showMessage(`Cannot find weather information for city "${cityName}"`, 'error');
         } finally {
             this.hideLoading();
         }
@@ -299,8 +334,8 @@ class WeatherApp {
             await this.displayWeatherData(weatherData);
             await this.loadForecastAndAlerts(lat, lon);
         } catch (error) {
-            console.error('加载坐标天气失败:', error);
-            this.showMessage('无法获取当前位置的天气信息', 'error');
+            console.error('Failed to load coordinates weather:', error);
+            this.showMessage('Cannot get weather information for current location', 'error');
         }
     }
 
@@ -317,7 +352,7 @@ class WeatherApp {
                 this.displayForecast(forecastData.value);
             }
         } catch (error) {
-            console.error('加载预报和预警失败:', error);
+            console.error('Failed to load forecast and alerts:', error);
         }
     }
 
@@ -424,7 +459,7 @@ class WeatherApp {
         
         this.displayForecast(demoForecast);
         this.updateFooterTimestamp();
-        this.showMessage('当前显示演示数据，请设置API密钥获取实时天气', 'info');
+        this.showMessage('Currently showing demo data. Please set API key to get real-time weather', 'info');
     }
 
     // 显示搜索建议
@@ -451,7 +486,7 @@ class WeatherApp {
     }
 
     // 显示加载状态
-    showLoading(message = '加载中...') {
+    showLoading(message = 'Loading...') {
         this.isLoading = true;
         const overlay = document.getElementById('loading-overlay');
         if (overlay) {
@@ -545,7 +580,7 @@ class WeatherApp {
                 moonIcon.textContent = weatherAPI.getMoonPhaseIcon(astronomyData.moonPhase);
             }
         } catch (error) {
-            console.error('更新天文信息失败:', error);
+            console.error('Failed to update astronomy info:', error);
         }
     }
 
@@ -589,7 +624,7 @@ class WeatherApp {
             // 降水概率图
             this.createPrecipitationChart('precipitation-chart', forecastData);
         } catch (error) {
-            console.error('创建图表失败:', error);
+            console.error('Failed to create charts:', error);
         }
     }
 

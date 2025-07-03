@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J2WR8XVZYC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-J2WR8XVZYC');
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -29,8 +39,9 @@
     <link rel="canonical" href="https://weatheralert.top">
     
     <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="weather-favicon.svg">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.webp">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
@@ -112,6 +123,38 @@
                     </button>
                 </div>
             </div>
+            
+            <!-- 快捷城市选择 -->
+            <div class="quick-cities">
+                <span class="quick-cities-label">Quick Select:</span>
+                <div class="quick-cities-buttons">
+                    <button class="quick-city-btn" data-city="New York">
+                        <i class="fas fa-building"></i>
+                        New York
+                    </button>
+                    <button class="quick-city-btn" data-city="London">
+                        <i class="fas fa-crown"></i>
+                        London
+                    </button>
+                    <button class="quick-city-btn" data-city="Tokyo">
+                        <i class="fas fa-mountain"></i>
+                        Tokyo
+                    </button>
+                    <button class="quick-city-btn" data-city="Shanghai">
+                        <i class="fas fa-city"></i>
+                        Shanghai
+                    </button>
+                    <button class="quick-city-btn" data-city="Paris">
+                        <i class="fas fa-monument"></i>
+                        Paris
+                    </button>
+                    <button class="quick-city-btn" data-city="Sydney">
+                        <i class="fas fa-water"></i>
+                        Sydney
+                    </button>
+                </div>
+            </div>
+            
             <div id="current-location" class="current-location">
                 <i class="fas fa-map-marker-alt"></i>
                 <span>Location not selected</span>

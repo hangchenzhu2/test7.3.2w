@@ -7,7 +7,7 @@ try {
     process.env.WEATHER_API_KEY = process.env.WEATHER_API_KEY || localEnv.WEATHER_API_KEY;
 } catch (e) {
     // 如果本地配置文件不存在，使用环境变量或默认值
-    console.log('本地环境变量文件不存在，使用系统环境变量');
+    console.log('Local environment file not found, using system environment variables');
 }
 
 // 使用Node.js内置fetch (Node 18+) 或 node-fetch
@@ -54,8 +54,8 @@ const WEATHER_API_BASE = 'https://api.weatherapi.com/v1';
 
 // 检查API密钥是否配置
 if (!WEATHER_API_KEY) {
-    console.error('❌ 错误：未配置 WEATHER_API_KEY 环境变量');
-    console.error('请参考 SECURITY.md 文件配置API密钥');
+            console.error('❌ Error: WEATHER_API_KEY environment variable not configured');
+        console.error('Please refer to SECURITY.md file to configure API key');
     process.exit(1);
 }
 
@@ -70,10 +70,10 @@ app.get('/api/current', async (req, res) => {
     try {
         const { q } = req.query;
         if (!q) {
-            return res.status(400).json({ error: '缺少位置参数' });
+            return res.status(400).json({ error: 'Missing location parameter' });
         }
 
-        console.log(`🌤️ 获取天气数据: ${q}`);
+        console.log(`🌤️ Getting weather data: ${q}`);
         
         const response = await fetch(
             `${WEATHER_API_BASE}/current.json?key=${WEATHER_API_KEY}&q=${q}&aqi=yes`
@@ -81,15 +81,15 @@ app.get('/api/current', async (req, res) => {
         
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
-            console.error('WeatherAPI错误:', response.status, errorData);
-            throw new Error(`WeatherAPI错误: ${response.status} - ${errorData.error?.message || '未知错误'}`);
+            console.error('WeatherAPI error:', response.status, errorData);
+            throw new Error(`WeatherAPI error: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
         }
         
         const data = await response.json();
-        console.log(`✅ 成功获取 ${data.location?.name} 的天气数据`);
+        console.log(`✅ Successfully retrieved weather data for ${data.location?.name}`);
         res.json(data);
     } catch (error) {
-        console.error('API错误:', error.message);
+        console.error('API error:', error.message);
         res.status(500).json({ error: error.message });
     }
 });
@@ -99,10 +99,10 @@ app.get('/api/forecast', async (req, res) => {
     try {
         const { q, days = 7 } = req.query;
         if (!q) {
-            return res.status(400).json({ error: '缺少位置参数' });
+            return res.status(400).json({ error: 'Missing location parameter' });
         }
 
-        console.log(`📊 获取预报数据: ${q}, ${days}天`);
+        console.log(`📊 Getting forecast data: ${q}, ${days} days`);
         
         const response = await fetch(
             `${WEATHER_API_BASE}/forecast.json?key=${WEATHER_API_KEY}&q=${q}&days=${days}&aqi=yes&alerts=yes`
@@ -110,15 +110,15 @@ app.get('/api/forecast', async (req, res) => {
         
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
-            console.error('预报API错误:', response.status, errorData);
-            throw new Error(`预报API错误: ${response.status} - ${errorData.error?.message || '未知错误'}`);
+            console.error('Forecast API error:', response.status, errorData);
+            throw new Error(`Forecast API error: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
         }
         
         const data = await response.json();
-        console.log(`✅ 成功获取 ${data.location?.name} 的${days}天预报`);
+        console.log(`✅ Successfully retrieved ${days}-day forecast for ${data.location?.name}`);
         res.json(data);
     } catch (error) {
-        console.error('预报错误:', error.message);
+        console.error('Forecast error:', error.message);
         res.status(500).json({ error: error.message });
     }
 });
@@ -128,10 +128,10 @@ app.get('/api/astronomy', async (req, res) => {
     try {
         const { q, dt } = req.query;
         if (!q) {
-            return res.status(400).json({ error: '缺少位置参数' });
+            return res.status(400).json({ error: 'Missing location parameter' });
         }
 
-        console.log(`🌙 获取天文数据: ${q}, 日期: ${dt || '今天'}`);
+        console.log(`🌙 Getting astronomy data: ${q}, date: ${dt || 'today'}`);
         
         const response = await fetch(
             `${WEATHER_API_BASE}/astronomy.json?key=${WEATHER_API_KEY}&q=${q}&dt=${dt || ''}`
@@ -139,15 +139,15 @@ app.get('/api/astronomy', async (req, res) => {
         
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
-            console.error('天文API错误:', response.status, errorData);
-            throw new Error(`天文API错误: ${response.status} - ${errorData.error?.message || '未知错误'}`);
+            console.error('Astronomy API error:', response.status, errorData);
+            throw new Error(`Astronomy API error: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
         }
         
         const data = await response.json();
-        console.log(`✅ 成功获取 ${data.location?.name} 的天文数据`);
+        console.log(`✅ Successfully retrieved astronomy data for ${data.location?.name}`);
         res.json(data);
     } catch (error) {
-        console.error('天文数据错误:', error.message);
+        console.error('Astronomy data error:', error.message);
         res.status(500).json({ error: error.message });
     }
 });
@@ -167,7 +167,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`🌤️ 天气服务器启动成功！`);
-    console.log(`📍 访问地址: http://localhost:${PORT}`);
-    console.log(`🔒 API密钥安全存储在后端`);
+    console.log(`🌤️ Weather server started successfully!`);
+    console.log(`📍 Access URL: http://localhost:${PORT}`);
+    console.log(`🔒 API key securely stored on backend`);
 }); 
