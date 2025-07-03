@@ -1,0 +1,33 @@
+[build]
+  # 构建目录 - 当前目录就是根目录
+  publish = "."
+  
+  # Functions目录
+  functions = "netlify/functions"
+
+# 重定向规则 - 将API请求重定向到函数
+[[redirects]]
+  from = "/api/current"
+  to = "/.netlify/functions/current"
+  status = 200
+
+[[redirects]]
+  from = "/api/forecast"
+  to = "/.netlify/functions/forecast"
+  status = 200
+
+[[redirects]]
+  from = "/api/astronomy"
+  to = "/.netlify/functions/astronomy"
+  status = 200
+
+[[redirects]]
+  from = "/api/health"
+  to = "/.netlify/functions/health"
+  status = 200
+
+# SPA路由支持 - 处理前端路由
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200 

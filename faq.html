@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Weather Alert USA</title>
+    <meta name="description" content="Frequently asked questions about Weather Alert USA weather forecasts, alerts, and services.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .faq-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .faq-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .faq-header h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        .faq-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+        .faq-item {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .faq-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        .faq-question {
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .faq-question i {
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        .faq-answer {
+            padding: 0 25px 25px 25px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+            display: none;
+        }
+        .faq-answer p {
+            margin-bottom: 15px;
+        }
+        .faq-answer ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        .faq-answer li {
+            margin-bottom: 8px;
+        }
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .search-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+        }
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="faq-content">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Weather Alert
+            </a>
+            
+            <div class="faq-header">
+                <h1>Frequently Asked Questions</h1>
+                <p style="color: rgba(255, 255, 255, 0.9);">Find answers to common questions about Weather Alert USA</p>
+            </div>
+            
+            <div class="search-box">
+                <input type="text" id="faq-search" placeholder="Search for questions...">
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How accurate are Weather Alert USA forecasts?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Our weather forecasts use advanced meteorological models with 85-90% accuracy for 3-day forecasts and 70-75% accuracy for 7-day forecasts.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How often is weather data updated?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Current conditions update every 15-30 minutes, hourly forecasts update every hour, and severe weather alerts are issued immediately.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What types of weather alerts do you provide?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We provide tornado warnings, severe thunderstorm alerts, winter storm warnings, hurricane updates, flood alerts, and temperature extreme advisories.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Is Weather Alert USA free to use?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! Weather Alert USA is completely free. We believe accurate weather information should be available to everyone for public safety.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do I set up weather alerts for my location?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Allow location access or enter your city manually, then enable notifications in the settings menu. Your browser will request permission to send alerts.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What do the different weather icons mean?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Our weather icons represent different conditions:</p>
+                    <ul>
+                        <li><i class="fas fa-sun" style="color: #ffd700;"></i> <b>Sunny:</b> Clear skies, minimal cloud cover</li>
+                        <li><i class="fas fa-cloud-sun" style="color: #87ceeb;"></i> <b>Partly Cloudy:</b> Some clouds, mostly sunny</li>
+                        <li><i class="fas fa-cloud" style="color: #gray;"></i> <b>Cloudy:</b> Overcast skies, limited sunshine</li>
+                        <li><i class="fas fa-cloud-rain" style="color: #4682b4;"></i> <b>Rainy:</b> Precipitation expected</li>
+                        <li><i class="fas fa-bolt" style="color: #ffd700;"></i> <b>Thunderstorms:</b> Lightning and thunder possible</li>
+                        <li><i class="fas fa-snowflake" style="color: #87ceeb;"></i> <b>Snow:</b> Snow or winter precipitation</li>
+                        <li><i class="fas fa-smog" style="color: #a0a0a0;"></i> <b>Fog/Mist:</b> Reduced visibility conditions</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do I interpret the air quality index?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>The Air Quality Index (AQI) measures air pollution levels:</p>
+                    <ul>
+                        <li><b>0-50 (Good):</b> Air quality is satisfactory</li>
+                        <li><b>51-100 (Moderate):</b> Acceptable for most people</li>
+                        <li><b>101-150 (Unhealthy for Sensitive Groups):</b> Sensitive individuals may experience symptoms</li>
+                        <li><b>151-200 (Unhealthy):</b> Everyone may experience health effects</li>
+                        <li><b>201-300 (Very Unhealthy):</b> Health warnings for everyone</li>
+                        <li><b>301+ (Hazardous):</b> Emergency conditions, everyone should avoid outdoor activities</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Can I use Weather Alert USA on mobile devices?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely! Our responsive design works seamlessly on mobile phones, tablets, desktops, and laptops. You can add it to your home screen like a native app.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Why might my location not be detected automatically?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Location detection issues can occur for several reasons:</p>
+                    <ul>
+                        <li><b>Browser Settings:</b> Location services may be disabled in your browser</li>
+                        <li><b>Privacy Settings:</b> You may have blocked location access for this website</li>
+                        <li><b>Network Issues:</b> Slow or unstable internet connection</li>
+                        <li><b>Device Settings:</b> Location services disabled on your device</li>
+                    </ul>
+                    <p>If automatic detection fails, you can always manually enter your city name in the search box.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How can I report incorrect weather information?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>If you notice incorrect weather information, please help us improve by:</p>
+                    <ul>
+                        <li>Visiting our <a href="contact.html" style="color: #667eea;">Contact Support</a> page</li>
+                        <li>Including your exact location and the specific issue</li>
+                        <li>Providing the time and date when you noticed the discrepancy</li>
+                        <li>Comparing with your local observations if possible</li>
+                    </ul>
+                    <p>We take accuracy seriously and investigate all reports to continuously improve our service.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Close all items
+                document.querySelectorAll('.faq-item').forEach(faqItem => {
+                    faqItem.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+        
+        // Search functionality
+        document.getElementById('faq-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
